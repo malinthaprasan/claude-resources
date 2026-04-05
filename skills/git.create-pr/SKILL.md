@@ -1,6 +1,21 @@
-Create a pull request to the upstream repository following these steps:
+---
+name: git.create-pr
+description: Create a pull request to the upstream repository using the WSO2 PR template.
+---
 
-## Step 1: Analyze Changes
+# Create PR
+
+Create a pull request to the upstream repository following the WSO2 PR template.
+
+## Usage
+
+```
+/create-pr
+```
+
+## Workflow
+
+### Step 1: Analyze Changes
 
 First, gather information about what has changed:
 
@@ -10,7 +25,7 @@ First, gather information about what has changed:
 - Run `git log --oneline upstream/main..HEAD` to list commits ahead of upstream
 - Examine documentation files in those commits (e.g., files in `<component>/spec/impls/` directories) to understand what features were implemented
 
-## Step 2: Draft the Pull Request
+### Step 2: Draft the Pull Request
 
 Using the information gathered above, fill out this WSO2 PR template:
 
@@ -28,7 +43,7 @@ Using the information gathered above, fill out this WSO2 PR template:
 > Summary of user stories addressed by this change>
 
 ## Documentation
-> Link(s) to product documentation that addresses the changes of this PR. If no doc impact, enter “N/A” plus brief explanation of why there’s no doc impact
+> Link(s) to product documentation that addresses the changes of this PR. If no doc impact, enter "N/A" plus brief explanation of why there's no doc impact
 
 ## Automation tests
  - Unit tests 
@@ -58,18 +73,18 @@ When filling out the template:
 - Reference architecture and design docs when relevant
 - Only fill in applicable sections - mark others as "N/A" with a brief explanation
 
-## Step 3: Review with User
+### Step 3: Review with User
 
 Present the complete drafted PR to the user for review and approval.
 
-## Step 4: Create the Pull Request
+### Step 4: Create the Pull Request
 
 Once the user confirms, create the PR using:
 ```bash
 gh pr create --repo wso2/api-platform --base main --head malinthaprasan:main --title "YOUR_TITLE" --body "FULL_PR_BODY"
 ```
 
-## Important Notes
+## Notes
 
 - Always verify the upstream remote is configured before proceeding
 - Show the PR draft to the user before creating it

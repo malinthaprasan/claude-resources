@@ -1,6 +1,19 @@
+---
+name: git.create-issue
+description: Create a GitHub issue in the wso2/api-platform repository using the appropriate issue template (bug, improvement, feature, or task).
+---
+
 # Create GitHub Issue
 
-You are helping the user create a GitHub issue in the repository https://github.com/wso2/api-platform.
+Create a GitHub issue in the repository https://github.com/wso2/api-platform.
+
+## Usage
+
+```
+/create-issue [issue-type]
+```
+
+If `[issue-type]` is not provided, ask the user which type to create.
 
 ## Issue Templates
 
@@ -26,7 +39,7 @@ The repository has the following issue templates in `.github/ISSUE_TEMPLATE/`:
 - **Description**: A clear description of what needs to be done (REQUIRED)
 - **Version**: Product/component version (optional)
 
-## Your Task
+## Workflow
 
 1. **Ask the user for the issue type** if not already provided:
    - bug
@@ -51,7 +64,7 @@ The repository has the following issue templates in `.github/ISSUE_TEMPLATE/`:
 
 6. **Confirm with the user** before creating the issue and show them the final issue content.
 
-## Important Notes
+## Notes
 
 - Always validate that all REQUIRED fields are provided before creating the issue
 - Ask clarifying questions if any information is ambiguous or incomplete

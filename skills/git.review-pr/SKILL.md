@@ -1,12 +1,27 @@
+---
+name: git.review-pr
+description: Review a pull request interactively by setting up a worktree and enabling conversation-based review.
+---
+
+# Review PR
+
 Review a pull request interactively. Sets up a worktree and enables conversation-based review.
 
-**Input:** $ARGUMENTS (PR number or URL, e.g., `845` or `https://github.com/wso2/api-platform/pull/845`)
+## Usage
 
-## Step 1: Parse PR Input
+```
+/review-pr <pr-number-or-url>
+```
+
+**Input:** PR number or URL (e.g., `845` or `https://github.com/wso2/api-platform/pull/845`)
+
+## Workflow
+
+### Step 1: Parse PR Input
 
 Extract the PR number from the input (handle both `845` and full URL formats like `https://github.com/wso2/api-platform/pull/845`).
 
-## Step 2: Fetch PR Metadata
+### Step 2: Fetch PR Metadata
 
 ```bash
 gh pr view <PR_NUMBER> --repo wso2/api-platform --json number,title,body,author,state,baseRefName,headRefName,headRepository,headRepositoryOwner
@@ -17,7 +32,7 @@ Extract:
 - Title (sanitize for directory name - replace spaces with dashes, remove special chars)
 - Head branch and repository info for fetching
 
-## Step 3: Setup Git Worktree
+### Step 3: Setup Git Worktree
 
 Create a worktree at `../ap-pr-reviews/<sanitized-title>-<pr-number>/`:
 
@@ -33,7 +48,7 @@ git fetch pr-<PR_NUMBER> <headRefName>
 git worktree add ../ap-pr-reviews/<sanitized-title>-<pr-number> pr-<PR_NUMBER>/<headRefName>
 ```
 
-## Step 4: Gather Initial Context
+### Step 4: Gather Initial Context
 
 Fetch and display:
 ```bash
@@ -44,7 +59,7 @@ gh pr view <PR_NUMBER> --repo wso2/api-platform
 
 List the changed files and their types (Go, YAML, etc.).
 
-## Step 5: Present Review Dashboard
+### Step 5: Present Review Dashboard
 
 Display to user:
 
@@ -75,7 +90,7 @@ Ready for interactive review. You can ask me to:
 What would you like to review first?
 ```
 
-## Conversation Mode
+### Conversation Mode
 
 In this mode, respond to user questions by:
 - Reading files from both the worktree (PR code) and main repo (for comparison)
