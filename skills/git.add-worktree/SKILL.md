@@ -23,19 +23,39 @@ Create a new git worktree for working on a branch in a separate directory.
 
 3. If creating a new branch, ask for the **base branch** (e.g., `main`, `develop`)
 
-4. **Execute the appropriate git command**:
+4. **Determine the worktree path** — do NOT ask the user. Detect the repo root and name:
+   ```bash
+   git rev-parse --show-toplevel
+   ```
+   Then construct the path as `<repo_root>/../<reponame>-wtrees/<branch_name>` (absolute path).
+   Tell the user: "Creating worktree at `<worktree_path>`"
+
+5. **Execute the appropriate git command**:
 
    For a new branch:
    ```bash
-   git worktree add -b <branch_name> /home/malintha/wso2apim/gitworkspace/ap-worktrees/<branch_name> <base_branch>
+   git worktree add -b <branch_name> <worktree_path> <base_branch>
    ```
 
    For an existing branch:
    ```bash
-   git worktree add /home/malintha/wso2apim/gitworkspace/ap-worktrees/<branch_name> <branch_name>
+   git worktree add <worktree_path> <branch_name>
    ```
 
-5. **After creation**:
+6. **Set up remote tracking**:
+
+   For a new branch — push to origin and set tracking in one step:
+   ```bash
+   git -C <worktree_path> push -u origin <branch_name>
+   ```
+
+   For an existing branch — set tracking to the matching remote branch (no push needed):
+   ```bash
+   git -C <worktree_path> branch --set-upstream-to=origin/<branch_name>
+   ```
+
+7. **After creation**:
    - Confirm the worktree was created successfully
-   - Show the path to the new worktree: `/home/malintha/wso2apim/gitworkspace/ap-worktrees/<branch_name>`
+   - Show the full path to the new worktree: `<worktree_path>`
+   - Confirm upstream tracking is set (e.g. `git -C <worktree_path> status` will show `Your branch is up to date with 'origin/<branch_name>'`)
    - Optionally list all worktrees with `git worktree list`
